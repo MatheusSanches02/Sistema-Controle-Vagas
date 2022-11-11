@@ -22,3 +22,21 @@ Suponha que cada sensor ultrassônico está instalado na altura de 2 m do solo, 
 Cada vaga deverá ter um sensor ultrassônico, um LED vermelho e um LED verde. Se a vaga estiver ocupada, o LED vermelho deverá acender e o verde apagar, caso contrário, o LED verde deverá ficar ligado e o vermelho desligado.
 
 O display LCD deverá mostrar a quantidade de vagas LIVRES e a quantidade de vagas OCUPADAS do estacionamento.
+
+
+--------
+
+Segunda parte do projeto, ocorre com as simulção do envio de quais vagas estão disponíveis, inspirado em uma arquitetura de IoT simples, um gateway utilizando o node-red.
+
+Como o sistema vai funcionar:
+
+Um flow recebe as informações dos sensores e envia para o segundo flow que irá exibir em um dashboard o status das vagas.
+
+Fluxo_Publisher - Gateway que recebe as informações das vagas via serial e envia (publisher) via protocolo MQTT. Simule o estacionamento com 2 vagas (vaga A e vaga B) utilize o node “inject”. O formato da mensagem dos sensores é:
+
+• Somente a vaga A disponível → envia “A”
+• Somente a vaga B disponível → envia “B”
+• Ambas as vagas disponíveis → envia “AB”
+• Nenhuma vaga disponível → envia “X”
+
+Fluxo-Subscriber - Dashboard que recebe (subscriber) os dados via protocolo MQTT e exibe o status em um Dashboard.
